@@ -6,3 +6,4 @@ scikit-learn
 dill
 boto3
 sagemaker
+-e.
