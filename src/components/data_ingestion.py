@@ -8,6 +8,9 @@ import pandas as pd
 import numpy as np
 from sklearn.model_selection import train_test_split
 
+from src.components.data_preprocessing import DataPreprocessorConfig
+from src.components.data_preprocessing import DataPreprocessor
+
 @dataclass
 class DataIngestionConfig:
     raw_data_path:str = os.path.join('artifacts/data.csv')
@@ -39,4 +42,7 @@ class DataIngestion:
         
 if __name__ == '__main__':
     data_ingest = DataIngestion()
-    data_ingest.data_ingestion()
+    train_data, test_data = data_ingest.data_ingestion()
+
+    data_preprocess = DataPreprocessor()
+    data_preprocess.preprocessing(train_data, test_data)
