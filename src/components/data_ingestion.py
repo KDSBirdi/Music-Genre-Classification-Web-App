@@ -11,6 +11,9 @@ from sklearn.model_selection import train_test_split
 from src.components.data_preprocessing import DataPreprocessorConfig
 from src.components.data_preprocessing import DataPreprocessor
 
+from src.components.model_trainer import ModelTrainerConfig
+from src.components.model_trainer import ModelTrainer
+
 @dataclass
 class DataIngestionConfig:
     raw_data_path:str = os.path.join('artifacts/data.csv')
@@ -29,6 +32,7 @@ class DataIngestion:
             os.makedirs(os.path.dirname(self.data_ingestion_config.train_data_path), exist_ok=True)
             data.to_csv(self.data_ingestion_config.raw_data_path)
             train_set, test_set = train_test_split(data, random_state=42)
+
             train_set.to_csv(self.data_ingestion_config.train_data_path)
             test_set.to_csv(self.data_ingestion_config.test_data_path)
             logging.info('train and test data splitted')
@@ -45,4 +49,7 @@ if __name__ == '__main__':
     train_data, test_data = data_ingest.data_ingestion()
 
     data_preprocess = DataPreprocessor()
-    data_preprocess.preprocessing(train_data, test_data)
+    final_train_data, final_test_data, _ = data_preprocess.preprocessing(train_data, test_data)
+    
+    model_train = ModelTrainer()
+    print(model_train.model_training(final_train_data, final_test_data))

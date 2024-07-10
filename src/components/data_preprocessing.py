@@ -49,7 +49,25 @@ class DataPreprocessor:
                 elif train_data_mfccs['Genre'][i]=='Romance':
                     arr.append(6)
 
-            target_df = pd.DataFrame(arr, columns=['Genre'])
+            train_target_df = pd.DataFrame(arr, columns=['Genre'])
+
+            arr = []
+            for i in range(len(test_data_mfccs['Genre'])):
+                if test_data_mfccs['Genre'][i]=='Funk':
+                    arr.append(1)
+                elif test_data_mfccs['Genre'][i]=='Rock':
+                    arr.append(2)
+                elif test_data_mfccs['Genre'][i]=='Hip Hop':
+                    arr.append(3)
+                elif test_data_mfccs['Genre'][i]=='Pop':
+                    arr.append(4)
+                elif test_data_mfccs['Genre'][i]=='Jazz':
+                    arr.append(5)
+                elif test_data_mfccs['Genre'][i]=='Romance':
+                    arr.append(6)
+
+            test_target_df = pd.DataFrame(arr, columns=['Genre'])
+            
             train_data = train_data_mfccs.drop('Genre', axis = 1)
             test_data = test_data_mfccs.drop('Genre', axis = 1)
 
@@ -58,9 +76,9 @@ class DataPreprocessor:
 
             train_data_scaled_df = pd.DataFrame(train_data_scaled)
             test_data_scaled_df = pd.DataFrame(test_data_scaled)
-            
-            final_train_data = pd.concat([train_data_scaled_df, target_df], axis = 1)
-            final_test_data = pd.concat([test_data_scaled_df, target_df], axis = 1)
+
+            final_train_data = pd.concat([train_data_scaled_df, train_target_df], axis = 1)
+            final_test_data = pd.concat([test_data_scaled_df, test_target_df], axis = 1)
             logging.info('preprocessing completed')
 
             save_object(
