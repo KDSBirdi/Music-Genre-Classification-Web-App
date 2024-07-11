@@ -6,6 +6,8 @@ import librosa
 import pandas as pd
 import numpy as np
 from src.utils import load_object
+from collections import Counter
+
 
 application = Flask(__name__)
 app = application
@@ -46,7 +48,7 @@ def upload_file():
     
 @app.route('/predict', methods = ['GET','POST'])
 def predict_file():
-    audio_file_path = file_path_arr[0]
+    audio_file_path = file_path_arr[-1]
     # audio_file_path = r"C:\Users\Bhavya Prakash\Downloads\Folder 1\Folder 1\Funk.mp3"
     y, sr = librosa.load(audio_file_path)
     mfccs = librosa.feature.mfcc(y=y, sr=sr)
@@ -56,19 +58,23 @@ def predict_file():
     preprocessor = load_object(file_path = 'artifacts/preprocessor.pkl')
     scaled_data = preprocessor.transform(mfccs_df)
     prediction = model.predict(scaled_data)
-    # return (render_template('home.html',results = prediction[0]))
-
-    if prediction[0] == 1:
+    most_common_genre = Counter(prediction).most_common(1)[0][0]
+    if most_common_genre == 1:
         return (render_template('home.html',results = 'Funk'))
-    elif prediction[0] == 2:
+        
+    elif most_common_genre == 2:
         return (render_template('home.html',results = 'Rock'))
-    elif prediction[0] == 3:
-        return (render_template('home.html',results = 'Hip Hop'))
-    elif prediction[0] == 4:
+        
+    elif most_common_genre == 3:
+        return (render_template('home.html',results = 'Hip_Hop'))
+        
+    elif most_common_genre == 4:
         return (render_template('home.html',results = 'Pop'))
-    elif prediction[0] == 5:
+        
+    elif most_common_genre == 5:
         return (render_template('home.html',results = 'Jazz'))
-    elif prediction[0] == 6:
+        
+    elif most_common_genre == 6:
         return (render_template('home.html',results = 'Romance'))
 
 if __name__ == '__main__':

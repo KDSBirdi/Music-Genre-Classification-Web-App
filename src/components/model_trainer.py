@@ -57,20 +57,20 @@ class ModelTrainer:
             logging.info('model training completed')
             # return classification_report(y_test, y_pred)
             most_common_element = Counter(y_pred).most_common(1)[0][0]
-            if most_common_element == 1:
-                return ('Funk')
-            elif most_common_element == 2:
-                return ('Rock')
-            elif most_common_element == 3:
-                return ('Hip Hop')
-            elif most_common_element == 4:
-                return ('Pop')
-            elif most_common_element == 5:
-                return ('Jazz')
-            elif most_common_element == 6:
-                return ('Romance')
+            # if most_common_element == 1:
+            #     return ('Funk')
+            # elif most_common_element == 2:
+            #     return ('Rock')
+            # elif most_common_element == 3:
+            #     return ('Hip Hop')
+            # elif most_common_element == 4:
+            #     return ('Pop')
+            # elif most_common_element == 5:
+            #     return ('Jazz')
+            # elif most_common_element == 6:
+            #     return ('Romance')
 
-            # return most_common_element
+            return most_common_element
 
         
         except Exception as e:
