@@ -1,7 +1,8 @@
 # 🎶Music Genre Classification Website🎶
-## Ever wondered how the music you listen gets classified as 'Romantic', 'Jazz', 'Pop', etc.? Well it is mostly done manually. 
-## How about a website that allows you to classify a music on your computer? Sounds interesting right..🌟
+### Ever wondered how the music you listen gets classified as 'Romantic', 'Jazz', 'Pop', etc.? Well it is mostly done manually. 
+### How about a website that allows you to classify a music on your computer? Sounds interesting right..🌟
 
+### Brief Overview about the project
 #### Let me give you a brief overview how it's done. So, a music or any audio file is a combination of various tempos, zero-crossings, chromagrams, MFCCS, etc. When we take out a feature suppose MFCCS of a complete audio file it is basically a 2D-array of shape (20,x) where 20 represents parameters of MFCCS feature such as MFCCS1, MFCCS2, MFCCS3, etc. X represents the size values of these parameters. The larger the audio file, the larger is it's value. Finally, a ML algorithm helps in predicting the final genre of the music!
 
 ### Before going further and explain you everything, how about taking a look at website?? 😍 Video Link ⬇️
@@ -9,10 +10,7 @@
 https://github.com/user-attachments/assets/4d70fda9-fde4-42e6-8061-2370599f0b60
 
 
-#### 1. Click on Predict Genre     2. Upload Music File    3. Click Upload
-#### Yes, it's that simple. Just 1,2,3 and you are done!!
-
-### Steps to use on your local computer (without cloning)-
+### 🚀Steps to use on your local computer (without cloning)🚀-
 #### Step-1 : All necessary libraries that you need to install are mentioned in 'Requirements.txt'. Make a file named 'requirements.txt' in your repository. You can use 'pip -r install requirements.txt' to install all files in one go. 
 ![requirements](https://github.com/user-attachments/assets/661663bd-2bd6-49e3-8a43-ce8d8a6a2b82)
 
@@ -29,6 +27,10 @@ https://github.com/user-attachments/assets/4d70fda9-fde4-42e6-8061-2370599f0b60
 #### Step-5 : Come back to 'src->components' and create three python files 'data_ingestion.py', 'data_preprocessor.py' and 'model_trainer.py'. After successfully creating go to terminal and type 'python -m src.components.data_ingestion.py'. Voila!! Are you able to see some modifications in your root folder?? 'artifacts' has been created which includes your pickle file of preprocessor and model.
 
 #### Step-6 : Create 'app.py' file, include all necessary libraries and '.pkl' file of your preprocessor and 'model'. Remember to include your 'html' files inside a separate folder namely 'templates'. To run this web-app go to terminal and type 'python app.py'. After it runs, go to your browser and type '127.0.0.1:5000' you should be able to access your website.
+
+### Backend Working-
+#### When the music file is uploaded, 'Librosa' library helps in finding out MFCCS feature of the file. It is a 2-D array which is then converted to a Pandas DataFrame. The data frame is preprocessed by 'preprocessor.pkl' file. After preprocessing, the data is feeded to model pipeline 'model.pkl' and final prediction is displayed back to the user.
+
 
 ## GitHub Link
 [Music Genre Classification Web App](https://github.com/bhavyaprakash2002/Music-Genre-Classification-Web-App)
